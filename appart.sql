@@ -40,7 +40,6 @@ LOCK TABLES `articulo` WRITE;
 INSERT INTO `articulo` VALUES (1,'titulo_prueba','descripcion_prueba','cuerpo_prueba');
 INSERT INTO `articulo` VALUES (2,'algo','descripcion de algo','cuerpo de algo');
 INSERT INTO `articulo` VALUES (3,'Nueva Pagina','Esta es la nueva pagina','Va con la base');
-INSERT INTO `articulo` VALUES (4,'Otra nueva pagina','Esta la es otra nueva pagina','Con la base');
 /*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-07-21 13:42:45
+-- Dump completed on 2014-07-21 16:45:01
