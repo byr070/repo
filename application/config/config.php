@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:8234/webapp';
+$config['base_url']	= 'http://localhost/webapp';
 
 /*
 |--------------------------------------------------------------------------
