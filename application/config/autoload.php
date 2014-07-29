@@ -11,7 +11,7 @@
 | is made regarding whether you intend to use it.  This file lets
 | you globally define which systems you would like loaded with every
 | request.
-|
+|eclipse download
 | -------------------------------------------------------------------
 | Instructions
 | -------------------------------------------------------------------
@@ -53,7 +53,7 @@ $autoload['packages'] = array();
 */
 
 /* $autoload['libraries'] = array(); */
-$autoload['libraries'] = array('database'); 
+$autoload['libraries'] = array('database','session'); 
 
 
 /*
@@ -65,7 +65,7 @@ $autoload['libraries'] = array('database');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array();
+$autoload['helper'] = array('url','form');
 
 
 /*
