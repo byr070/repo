@@ -2,7 +2,7 @@
 	<?php if (isset($account_created)) { ?>
 		<h3><?php echo $account_created; ?></h3>
 	<?php } else { ?>
-		<h1>Login, bitch.</h1>
+		<h1>LLLLOOOOGGIINNNN</h1>
 	<?php } ?>
 	
 	<?php
