@@ -15,7 +15,7 @@ class Empleado_model extends CI_Model {
 	function crear_usuario() {
 		$new_member_insert_data = array (
 			'usu_email'      => $this->input->post('email'),
-			'usu_clave'   => md5($this->input->post('password'))
+			'usu_clave'   => md5($this->input->post('clave'))
 		);
 		$insert = $this->db->insert('usuarios', $new_member_insert_data);
 		return $insert;
