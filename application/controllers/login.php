@@ -24,43 +24,33 @@ class Login extends CI_Controller {
 
 			$this->session->set_userdata($data);
 			redirect('articulos');
-			echo 'ajdsjfajja';
 	    } else {
-	    	echo 'elseelselsels';
 			$this->index();
 		}
     }
     
-  //   function signup() {
-		// $this->load->view('includes/header');
-		// $this->load->view('signup_form');
-		// $this->load->view('includes/footer');	
-  //   }
-    
-    function create_member(){
+    function signup() {
+		 $this->load->view('signup_form');
+	}
+	    
+    function crear_usuario(){
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('first_name', 'Name', 'trim|required');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+		//$this->form_validation->set_rules('first_name', 'Name', 'trim|required');
+		//$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
 		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|callback_check_if_email_exists');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_lenght[4]|max_length[15]|callback_check_if_username_exists');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_lenght[4]|max_length[32]');
-		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required|matches[password]');
+		//$this->form_validation->set_rules('username', 'Username', 'trim|required|min_lenght[4]|max_length[15]|callback_check_if_username_exists');
+		$this->form_validation->set_rules('clave', 'Password', 'trim|required|min_lenght[4]|max_length[32]');
+		$this->form_validation->set_rules('confirmacion_clave', 'Password Confirmation', 'trim|required|matches[clave]');
 		
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('includes/header');
-			$this->load->view('signup_form');
-			$this->load->view('includes/footer');
+					$this->load->view('signup_form');
 		} else {
-			$this->load->model('membership_model');
-			if ($query = $this->membership_model->create_member()) {
-				$data['account_created'] = 'Tu cuenta ha sido creada. <br/><br/> Ahora puedes entrar.';
-				$this->load->view('includes/header');
+			$this->load->model('empleado_model');
+			if ($query = $this->empleado_model->crea_usuario()) {
+				$data['account_created'] = 'Usuario creado. <br/><br/> Ahora puedes entrar.';
 				$this->load->view('login_form',$data);
-				$this->load->view('includes/footer');
 			} else {
-				$this->load->view('includes/header');
 				$this->load->view('signup_form');
-				$this->load->view('includes/footer');
 			}
 		}
 	}
