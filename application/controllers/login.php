@@ -1,48 +1,41 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	function index(){
-		$this->load->view('includes/header');
 		$this->load->view('login_form');
-		$this->load->view('includes/footer');
+		// $this->load->view('includes/header');
+		// $this->load->view('login_form');
+		// $this->load->view('includes/footer');
 	}
 	
-	function validate_credentials(){
-		$this->load->model('membership_model');
-		$query = $this->membership_model->validate();
+	function validar(){
+
+		echo $this->input->post('e-mail');
+		echo $this->input->post('clave');
+		
+		$this->load->model('empleado_model');
+		$query = $this->empleado_model->validar();
+		echo $query;
 		if($query){
 			$data = array(
-				'username' => $this->input->post('username'),
+				'e-mail' => $this->input->post('e-mail'),
 				'is_logged_in' => true
 			);
+
 			$this->session->set_userdata($data);
-			redirect('site/members_area');
+			redirect('articulos');
+			echo 'ajdsjfajja';
 	    } else {
+	    	echo 'elseelselsels';
 			$this->index();
 		}
     }
     
-    function signup() {
-		$this->load->view('includes/header');
-		$this->load->view('signup_form');
-		$this->load->view('includes/footer');	
-    }
+  //   function signup() {
+		// $this->load->view('includes/header');
+		// $this->load->view('signup_form');
+		// $this->load->view('includes/footer');	
+  //   }
     
     function create_member(){
 		$this->load->library('form_validation');
@@ -94,6 +87,4 @@ class Login extends CI_Controller {
 	
 	function logout(){}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+?>
