@@ -1,92 +1,106 @@
--- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 5.6.16, for osx10.6 (x86_64)
 --
--- Servidor: localhost
--- Tiempo de generación: 30-07-2014 a las 05:17:18
--- Versión del servidor: 5.6.16
--- Versión de PHP: 5.5.11
+-- Host: localhost    Database: tesis
+-- ------------------------------------------------------
+-- Server version	5.6.16
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `tesis`
+-- Table structure for table `Alimentacion`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Alimentacion`
---
-
-CREATE TABLE IF NOT EXISTS `Alimentacion` (
+DROP TABLE IF EXISTS `Alimentacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Alimentacion` (
   `aliId` int(11) NOT NULL,
   `aliNombre` varchar(15) NOT NULL,
   `aliHoraInicio` time NOT NULL,
   `alHoraFin` time NOT NULL,
   `Organizacion_orgId` int(11) NOT NULL,
   PRIMARY KEY (`aliId`),
-  KEY `Alimentacion_Organizacion` (`Organizacion_orgId`)
+  KEY `Alimentacion_Organizacion` (`Organizacion_orgId`),
+  CONSTRAINT `Alimentacion_Organizacion` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Cargo`
+-- Dumping data for table `Alimentacion`
 --
 
-CREATE TABLE IF NOT EXISTS `Cargo` (
+LOCK TABLES `Alimentacion` WRITE;
+/*!40000 ALTER TABLE `Alimentacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Alimentacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Cargo`
+--
+
+DROP TABLE IF EXISTS `Cargo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Cargo` (
   `car_id` int(11) NOT NULL,
   `car_nombre` varchar(30) NOT NULL,
   `sal_id` int(11) NOT NULL,
   PRIMARY KEY (`car_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ci_sessions`
---
-
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
-  `session_id` varchar(40) NOT NULL DEFAULT '0',
-  `ip_address` varchar(45) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
-  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
-  `user_data` text NOT NULL,
-  PRIMARY KEY (`session_id`),
-  KEY `last_activity_idx` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `ci_sessions`
+-- Dumping data for table `Cargo`
 --
 
-INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('2713413cee52daf30367d746dfc790ea', '192.168.0.20', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36', 1406687828, ''),
-('d6034d4e1d74b8ede538f31a1a3273b8', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4', 1406689479, '');
-
--- --------------------------------------------------------
+LOCK TABLES `Cargo` WRITE;
+/*!40000 ALTER TABLE `Cargo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Cargo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `EmpHor`
+-- Table structure for table `EmpHor`
 --
 
-CREATE TABLE IF NOT EXISTS `EmpHor` (
+DROP TABLE IF EXISTS `EmpHor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EmpHor` (
   `Empleado_usuId` int(11) NOT NULL,
   `Horario_horId` int(11) NOT NULL,
   PRIMARY KEY (`Empleado_usuId`,`Horario_horId`),
-  KEY `EmpHor_Horario` (`Horario_horId`)
+  KEY `EmpHor_Horario` (`Horario_horId`),
+  CONSTRAINT `EmpHor_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
+  CONSTRAINT `EmpHor_Horario` FOREIGN KEY (`Horario_horId`) REFERENCES `HorarioTrabajo` (`horId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Empleado`
+-- Dumping data for table `EmpHor`
 --
 
-CREATE TABLE IF NOT EXISTS `Empleado` (
+LOCK TABLES `EmpHor` WRITE;
+/*!40000 ALTER TABLE `EmpHor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `EmpHor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Empleado`
+--
+
+DROP TABLE IF EXISTS `Empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Empleado` (
   `empId` int(11) NOT NULL,
   `Organizacion_orgId` int(11) NOT NULL,
   `Tipo_idTipo` int(11) NOT NULL,
@@ -101,265 +115,452 @@ CREATE TABLE IF NOT EXISTS `Empleado` (
   KEY `Empleado_Jornada` (`Jornada_jorId`),
   KEY `Empleado_Organización` (`Organizacion_orgId`),
   KEY `Empleado_Tarjeta` (`Tarjeta_id`),
-  KEY `Empleado_Tipo` (`Tipo_idTipo`)
+  KEY `Empleado_Tipo` (`Tipo_idTipo`),
+  CONSTRAINT `Empleado_Cargo` FOREIGN KEY (`Cargo_carId`) REFERENCES `Cargo` (`car_id`),
+  CONSTRAINT `Empleado_Jornada` FOREIGN KEY (`Jornada_jorId`) REFERENCES `Jornada` (`jorId`),
+  CONSTRAINT `Empleado_Organización` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`),
+  CONSTRAINT `Empleado_Tarjeta` FOREIGN KEY (`Tarjeta_id`) REFERENCES `Tarjeta` (`id`),
+  CONSTRAINT `Empleado_Tipo` FOREIGN KEY (`Tipo_idTipo`) REFERENCES `Tipo` (`idTipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Feriado`
+-- Dumping data for table `Empleado`
 --
 
-CREATE TABLE IF NOT EXISTS `Feriado` (
+LOCK TABLES `Empleado` WRITE;
+/*!40000 ALTER TABLE `Empleado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Feriado`
+--
+
+DROP TABLE IF EXISTS `Feriado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Feriado` (
   `ferId` int(11) NOT NULL,
   `ferNombre` int(11) NOT NULL,
   `ferDia` int(11) NOT NULL,
   PRIMARY KEY (`ferId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `HorarioTrabajo`
+-- Dumping data for table `Feriado`
 --
 
-CREATE TABLE IF NOT EXISTS `HorarioTrabajo` (
+LOCK TABLES `Feriado` WRITE;
+/*!40000 ALTER TABLE `Feriado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Feriado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `HorarioTrabajo`
+--
+
+DROP TABLE IF EXISTS `HorarioTrabajo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `HorarioTrabajo` (
   `horId` int(11) NOT NULL,
   `horaInicioTrabajo` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `horaFinTrabajo` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`horId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Jornada`
+-- Dumping data for table `HorarioTrabajo`
 --
 
-CREATE TABLE IF NOT EXISTS `Jornada` (
+LOCK TABLES `HorarioTrabajo` WRITE;
+/*!40000 ALTER TABLE `HorarioTrabajo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `HorarioTrabajo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Jornada`
+--
+
+DROP TABLE IF EXISTS `Jornada`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Jornada` (
   `jorId` int(11) NOT NULL,
   `diasTrabajo` int(11) NOT NULL,
   `diasDescanso` int(11) NOT NULL,
   PRIMARY KEY (`jorId`),
   UNIQUE KEY `Jornada_ak_1` (`diasTrabajo`,`diasDescanso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Objetos`
+-- Dumping data for table `Jornada`
 --
 
-CREATE TABLE IF NOT EXISTS `Objetos` (
+LOCK TABLES `Jornada` WRITE;
+/*!40000 ALTER TABLE `Jornada` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Jornada` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Objetos`
+--
+
+DROP TABLE IF EXISTS `Objetos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Objetos` (
   `obj_id` int(11) NOT NULL AUTO_INCREMENT,
   `obj_nombre` varchar(30) NOT NULL,
   PRIMARY KEY (`obj_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Organizacion`
+-- Dumping data for table `Objetos`
 --
 
-CREATE TABLE IF NOT EXISTS `Organizacion` (
+LOCK TABLES `Objetos` WRITE;
+/*!40000 ALTER TABLE `Objetos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Objetos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Organizacion`
+--
+
+DROP TABLE IF EXISTS `Organizacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Organizacion` (
   `orgId` int(11) NOT NULL,
   `orgNombre` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`orgId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `PeriodoSalida`
+-- Dumping data for table `Organizacion`
 --
 
-CREATE TABLE IF NOT EXISTS `PeriodoSalida` (
+LOCK TABLES `Organizacion` WRITE;
+/*!40000 ALTER TABLE `Organizacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Organizacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PeriodoSalida`
+--
+
+DROP TABLE IF EXISTS `PeriodoSalida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PeriodoSalida` (
   `Empleado_usuId` int(11) NOT NULL,
   `TipoSalida_tipId` int(11) NOT NULL,
   PRIMARY KEY (`Empleado_usuId`,`TipoSalida_tipId`),
-  KEY `SalidaTomada_TipoSalida` (`TipoSalida_tipId`)
+  KEY `SalidaTomada_TipoSalida` (`TipoSalida_tipId`),
+  CONSTRAINT `SalidaTomada_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
+  CONSTRAINT `SalidaTomada_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Permisos`
+-- Dumping data for table `PeriodoSalida`
 --
 
-CREATE TABLE IF NOT EXISTS `Permisos` (
+LOCK TABLES `PeriodoSalida` WRITE;
+/*!40000 ALTER TABLE `PeriodoSalida` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PeriodoSalida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Permisos`
+--
+
+DROP TABLE IF EXISTS `Permisos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Permisos` (
   `rol_id` int(11) NOT NULL,
   `obj_id` int(11) NOT NULL,
   `perm_ver` tinyint(1) NOT NULL,
   PRIMARY KEY (`rol_id`,`obj_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `ProEmp`
+-- Dumping data for table `Permisos`
 --
 
-CREATE TABLE IF NOT EXISTS `ProEmp` (
+LOCK TABLES `Permisos` WRITE;
+/*!40000 ALTER TABLE `Permisos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Permisos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ProEmp`
+--
+
+DROP TABLE IF EXISTS `ProEmp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ProEmp` (
   `Proyecto_proId` int(11) NOT NULL,
   `Empleado_usuId` int(11) NOT NULL,
   PRIMARY KEY (`Proyecto_proId`,`Empleado_usuId`),
-  KEY `ProEmp_Empleado` (`Empleado_usuId`)
+  KEY `ProEmp_Empleado` (`Empleado_usuId`),
+  CONSTRAINT `ProEmp_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
+  CONSTRAINT `ProEmp_Proyecto` FOREIGN KEY (`Proyecto_proId`) REFERENCES `Proyecto` (`proId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Proyecto`
+-- Dumping data for table `ProEmp`
 --
 
-CREATE TABLE IF NOT EXISTS `Proyecto` (
+LOCK TABLES `ProEmp` WRITE;
+/*!40000 ALTER TABLE `ProEmp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProEmp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Proyecto`
+--
+
+DROP TABLE IF EXISTS `Proyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Proyecto` (
   `proId` int(11) NOT NULL,
   PRIMARY KEY (`proId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Roles`
+-- Dumping data for table `Proyecto`
 --
 
-CREATE TABLE IF NOT EXISTS `Roles` (
+LOCK TABLES `Proyecto` WRITE;
+/*!40000 ALTER TABLE `Proyecto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Roles`
+--
+
+DROP TABLE IF EXISTS `Roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Roles` (
   `rol_id` int(11) NOT NULL AUTO_INCREMENT,
   `rol_nombre` varchar(20) NOT NULL,
   `usu_id` int(11) NOT NULL,
   PRIMARY KEY (`rol_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Salario`
+-- Dumping data for table `Roles`
 --
 
-CREATE TABLE IF NOT EXISTS `Salario` (
+LOCK TABLES `Roles` WRITE;
+/*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Salario`
+--
+
+DROP TABLE IF EXISTS `Salario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Salario` (
   `sal_id` int(11) NOT NULL,
   `sal_valor` int(11) NOT NULL,
   PRIMARY KEY (`sal_id`),
-  KEY `Salario_Empleado` (`sal_valor`)
+  KEY `Salario_Empleado` (`sal_valor`),
+  CONSTRAINT `Salario_Empleado` FOREIGN KEY (`sal_valor`) REFERENCES `Empleado` (`empId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `SalidaAnual`
+-- Dumping data for table `Salario`
 --
 
-CREATE TABLE IF NOT EXISTS `SalidaAnual` (
+LOCK TABLES `Salario` WRITE;
+/*!40000 ALTER TABLE `Salario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Salario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `SalidaAnual`
+--
+
+DROP TABLE IF EXISTS `SalidaAnual`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SalidaAnual` (
   `Empleado_usuId` int(11) NOT NULL,
   `TipoSalida_tipId` int(11) NOT NULL,
   `anio` int(11) NOT NULL,
   PRIMARY KEY (`Empleado_usuId`,`TipoSalida_tipId`,`anio`),
-  KEY `Salida_TipoSalida` (`TipoSalida_tipId`)
+  KEY `Salida_TipoSalida` (`TipoSalida_tipId`),
+  CONSTRAINT `Salida_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
+  CONSTRAINT `Salida_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Tarjeta`
+-- Dumping data for table `SalidaAnual`
 --
 
-CREATE TABLE IF NOT EXISTS `Tarjeta` (
+LOCK TABLES `SalidaAnual` WRITE;
+/*!40000 ALTER TABLE `SalidaAnual` DISABLE KEYS */;
+/*!40000 ALTER TABLE `SalidaAnual` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Tarjeta`
+--
+
+DROP TABLE IF EXISTS `Tarjeta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Tarjeta` (
   `id` int(11) NOT NULL,
   `valor` char(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Tarjeta_ak_1` (`valor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Tipo`
+-- Dumping data for table `Tarjeta`
 --
 
-CREATE TABLE IF NOT EXISTS `Tipo` (
+LOCK TABLES `Tarjeta` WRITE;
+/*!40000 ALTER TABLE `Tarjeta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Tarjeta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Tipo`
+--
+
+DROP TABLE IF EXISTS `Tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Tipo` (
   `idTipo` int(11) NOT NULL,
   `tipo` varchar(10) NOT NULL,
   PRIMARY KEY (`idTipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `TipoSalida`
+-- Dumping data for table `Tipo`
 --
 
-CREATE TABLE IF NOT EXISTS `TipoSalida` (
+LOCK TABLES `Tipo` WRITE;
+/*!40000 ALTER TABLE `Tipo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Tipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `TipoSalida`
+--
+
+DROP TABLE IF EXISTS `TipoSalida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TipoSalida` (
   `tipId` int(11) NOT NULL,
   PRIMARY KEY (`tipId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Estructura de tabla para la tabla `Usuarios`
+-- Dumping data for table `TipoSalida`
 --
 
-CREATE TABLE IF NOT EXISTS `Usuarios` (
+LOCK TABLES `TipoSalida` WRITE;
+/*!40000 ALTER TABLE `TipoSalida` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TipoSalida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Usuarios`
+--
+
+DROP TABLE IF EXISTS `Usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Usuarios` (
   `usu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `usu_usuario` varchar(30) NOT NULL,
-  `usu_clave` varchar(15) NOT NULL,
-  `usu_estado` tinyint(1) NOT NULL,
-  `emp_id` int(11) NOT NULL,
+  `usu_email` varchar(30) NOT NULL,
+  `usu_clave` varchar(32) NOT NULL,
   PRIMARY KEY (`usu_id`),
-  UNIQUE KEY `usu_usuario` (`usu_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  UNIQUE KEY `usu_usuario` (`usu_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Restricciones para tablas volcadas
+-- Dumping data for table `Usuarios`
 --
 
---
--- Filtros para la tabla `Alimentacion`
---
-ALTER TABLE `Alimentacion`
-  ADD CONSTRAINT `Alimentacion_Organizacion` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`);
+LOCK TABLES `Usuarios` WRITE;
+/*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
+INSERT INTO `Usuarios` VALUES (1,'daniel','aa47f8215c6f30a0dcdb2a36a9f4168e');
+INSERT INTO `Usuarios` VALUES (2,'byron','8720070ac8f94bbbff5a347eed656925');
+/*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Filtros para la tabla `EmpHor`
+-- Table structure for table `ci_sessions`
 --
-ALTER TABLE `EmpHor`
-  ADD CONSTRAINT `EmpHor_Horario` FOREIGN KEY (`Horario_horId`) REFERENCES `HorarioTrabajo` (`horId`),
-  ADD CONSTRAINT `EmpHor_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`);
+
+DROP TABLE IF EXISTS `ci_sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Filtros para la tabla `Empleado`
+-- Dumping data for table `ci_sessions`
 --
-ALTER TABLE `Empleado`
-  ADD CONSTRAINT `Empleado_Tipo` FOREIGN KEY (`Tipo_idTipo`) REFERENCES `Tipo` (`idTipo`),
-  ADD CONSTRAINT `Empleado_Cargo` FOREIGN KEY (`Cargo_carId`) REFERENCES `Cargo` (`car_id`),
-  ADD CONSTRAINT `Empleado_Jornada` FOREIGN KEY (`Jornada_jorId`) REFERENCES `Jornada` (`jorId`),
-  ADD CONSTRAINT `Empleado_Organización` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`),
-  ADD CONSTRAINT `Empleado_Tarjeta` FOREIGN KEY (`Tarjeta_id`) REFERENCES `Tarjeta` (`id`);
 
---
--- Filtros para la tabla `PeriodoSalida`
---
-ALTER TABLE `PeriodoSalida`
-  ADD CONSTRAINT `SalidaTomada_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`),
-  ADD CONSTRAINT `SalidaTomada_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`);
+LOCK TABLES `ci_sessions` WRITE;
+/*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
+INSERT INTO `ci_sessions` VALUES ('1e1da35784d699ed08a67158ba21b667','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368226,'a:3:{s:9:\"user_data\";s:0:\"\";s:6:\"e-mail\";s:6:\"daniel\";s:12:\"is_logged_in\";b:1;}');
+INSERT INTO `ci_sessions` VALUES ('5353f241e240fc42843b092a1c544035','192.168.0.9','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407367190,'');
+INSERT INTO `ci_sessions` VALUES ('af2faf3e24b9637b6a3f9108394c60a6','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407364704,'');
+INSERT INTO `ci_sessions` VALUES ('f65e948550caef6bcddeafec1daaa105','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368063,'a:2:{s:6:\"e-mail\";s:5:\"byron\";s:12:\"is_logged_in\";b:1;}');
+INSERT INTO `ci_sessions` VALUES ('f71b82e31712424c3175d1c47a8c6da2','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407364747,'');
+/*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Filtros para la tabla `ProEmp`
---
-ALTER TABLE `ProEmp`
-  ADD CONSTRAINT `ProEmp_Proyecto` FOREIGN KEY (`Proyecto_proId`) REFERENCES `Proyecto` (`proId`),
-  ADD CONSTRAINT `ProEmp_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`);
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
---
--- Filtros para la tabla `Salario`
---
-ALTER TABLE `Salario`
-  ADD CONSTRAINT `Salario_Empleado` FOREIGN KEY (`sal_valor`) REFERENCES `Empleado` (`empId`);
-
---
--- Filtros para la tabla `SalidaAnual`
---
-ALTER TABLE `SalidaAnual`
-  ADD CONSTRAINT `Salida_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`),
-  ADD CONSTRAINT `Salida_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`);
+-- Dump completed on 2014-08-06 18:46:54
