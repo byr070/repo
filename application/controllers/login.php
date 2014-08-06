@@ -16,6 +16,8 @@ class Login extends CI_Controller {
 		$this->load->model('empleado_model');
 		$query = $this->empleado_model->validar();
 		echo $query;
+		
+		
 		if($query){
 			$data = array(
 				'e-mail' => $this->input->post('e-mail'),
@@ -46,7 +48,7 @@ class Login extends CI_Controller {
 					$this->load->view('signup_form');
 		} else {
 			$this->load->model('empleado_model');
-			if ($query = $this->empleado_model->crea_usuario()) {
+			if ($query = $this->empleado_model->crear_usuario()) {
 				$data['account_created'] = 'Usuario creado. <br/><br/> Ahora puedes entrar.';
 				$this->load->view('login_form',$data);
 			} else {
@@ -66,8 +68,8 @@ class Login extends CI_Controller {
 	}
 	
 	function check_if_email_exists($requested_email) {
-		$this->load->model('membership_model');
-		$email_not_in_use = $this->membership_model->check_if_email_exists($requested_email);
+		$this->load->model('empleado_model');
+		$email_not_in_use = $this->empleado_model->check_if_email_exists($requested_email);
 		if ($email_not_in_use) {
 			return TRUE;
 		} else {

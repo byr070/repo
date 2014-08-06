@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.16, for osx10.6 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.16, for Linux (i686)
 --
 -- Host: localhost    Database: tesis
 -- ------------------------------------------------------
@@ -565,4 +565,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-06 21:19:11
+-- Dump completed on 2014-08-06 21:25:31

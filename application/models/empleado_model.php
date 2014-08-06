@@ -3,11 +3,13 @@ class Empleado_model extends CI_Model {
 	
 	function validar(){
 		// redirect('articulos');
-		// echo "validar";
+		echo "validar";
 		$this->db->where('usu_email', $this->input->post('e-mail'));
 		$this->db->where('usu_clave', md5($this->input->post('clave')));
 		$query = $this->db->get('usuarios');
+		echo $query->num_rows;
 		if ($query->num_rows == 1) {
+			
 			return true;
 		}
 	}
@@ -32,7 +34,7 @@ class Empleado_model extends CI_Model {
 	}
 	
 	function check_if_email_exists($email) {
-		$this->db->where('email', $email);
+		$this->db->where('usu_email', $email);
 		$result = $this->db->get('usuarios');
 		if( $result->num_rows() > 0) {
 			return FALSE;
