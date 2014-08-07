@@ -496,33 +496,6 @@ LOCK TABLES `TipoSalida` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Usuarios`
---
-
-DROP TABLE IF EXISTS `Usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Usuarios` (
-  `usu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `usu_email` varchar(30) NOT NULL,
-  `usu_clave` varchar(32) NOT NULL,
-  PRIMARY KEY (`usu_id`),
-  UNIQUE KEY `usu_usuario` (`usu_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Usuarios`
---
-
-LOCK TABLES `Usuarios` WRITE;
-/*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
-INSERT INTO `Usuarios` VALUES (1,'daniel','aa47f8215c6f30a0dcdb2a36a9f4168e');
-INSERT INTO `Usuarios` VALUES (2,'byron','8720070ac8f94bbbff5a347eed656925');
-/*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ci_sessions`
 --
 
@@ -547,6 +520,7 @@ CREATE TABLE `ci_sessions` (
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` VALUES ('1e1da35784d699ed08a67158ba21b667','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368226,'a:3:{s:9:\"user_data\";s:0:\"\";s:6:\"e-mail\";s:6:\"daniel\";s:12:\"is_logged_in\";b:1;}');
+INSERT INTO `ci_sessions` VALUES ('24383cd628039c6b5c07839cfcda67d5','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407408473,'');
 INSERT INTO `ci_sessions` VALUES ('451794b52803c5edf48ac1a9d9462b4b','192.168.0.9','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407375456,'');
 INSERT INTO `ci_sessions` VALUES ('504ea4bcfc42719b5dc23ac2b587f48f','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407376261,'');
 INSERT INTO `ci_sessions` VALUES ('9e77891cea1271c3272b7bb7a97d18c6','192.168.0.9','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407372038,'');
@@ -554,6 +528,31 @@ INSERT INTO `ci_sessions` VALUES ('af2faf3e24b9637b6a3f9108394c60a6','::1','Mozi
 INSERT INTO `ci_sessions` VALUES ('f65e948550caef6bcddeafec1daaa105','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368063,'a:2:{s:6:\"e-mail\";s:5:\"byron\";s:12:\"is_logged_in\";b:1;}');
 INSERT INTO `ci_sessions` VALUES ('f71b82e31712424c3175d1c47a8c6da2','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407364747,'');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarios` (
+  `usu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usu_email` varchar(30) NOT NULL,
+  `usu_clave` varchar(32) NOT NULL,
+  PRIMARY KEY (`usu_id`),
+  UNIQUE KEY `usu_usuario` (`usu_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -565,4 +564,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-06 21:25:31
+-- Dump completed on 2014-08-07 16:41:28
