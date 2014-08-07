@@ -14,11 +14,8 @@
 | path to your installation.
 |
 */
-<<<<<<< HEAD
+
 $config['base_url']	= 'http://localhost:8234/tesis/index.php';
-=======
-$config['base_url']	= 'http://localhost/tesis';
->>>>>>> cf154d07c510c758d002a3c7e0639ebf2951055d
 
 /*
 |--------------------------------------------------------------------------

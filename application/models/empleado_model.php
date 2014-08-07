@@ -12,14 +12,10 @@ class Empleado_model extends CI_Model {
 		}
 	}
 	
-	function create_member() {
-		$username = $this->input->post('username');
+	function crear_usuario() {
 		$new_member_insert_data = array (
-			'first_name' => $this->input->post('first_name'),
-			'last_name'  => $this->input->post('last_name'),
-			'email'      => $this->input->post('email'),
-			'usuario'   => $this->input->post('username'),
-			'clave'   => md5($this->input->post('password'))
+			'usu_email'      => $this->input->post('email'),
+			'usu_clave'   => md5($this->input->post('clave'))
 		);
 		$insert = $this->db->insert('usuarios', $new_member_insert_data);
 		return $insert;
