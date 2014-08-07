@@ -24,9 +24,7 @@ class Login extends CI_Controller {
 
 			$this->session->set_userdata($data);
 			redirect('articulos');
-			echo 'ajdsjfajja';
 	    } else {
-	    	echo 'elseelselsels';
 			$this->index();
 		}
     }
