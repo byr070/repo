@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://localhost:8234/tesis/index.php';
+$config['base_url']	= 'http://localhost:8234/tesis/';
 
 /*
 |--------------------------------------------------------------------------

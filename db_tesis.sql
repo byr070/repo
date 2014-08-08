@@ -351,30 +351,6 @@ LOCK TABLES `Proyecto` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Roles`
---
-
-DROP TABLE IF EXISTS `Roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Roles` (
-  `rol_id` int(11) NOT NULL AUTO_INCREMENT,
-  `rol_nombre` varchar(20) NOT NULL,
-  `usu_id` int(11) NOT NULL,
-  PRIMARY KEY (`rol_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Roles`
---
-
-LOCK TABLES `Roles` WRITE;
-/*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Salario`
 --
 
@@ -496,6 +472,32 @@ LOCK TABLES `TipoSalida` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `autologin_usuario`
+--
+
+DROP TABLE IF EXISTS `autologin_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `autologin_usuario` (
+  `key_id` char(32) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `user_agent` varchar(150) NOT NULL,
+  `last_ip` varchar(40) NOT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`key_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `autologin_usuario`
+--
+
+LOCK TABLES `autologin_usuario` WRITE;
+/*!40000 ALTER TABLE `autologin_usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `autologin_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ci_sessions`
 --
 
@@ -510,7 +512,7 @@ CREATE TABLE `ci_sessions` (
   `user_data` text NOT NULL,
   PRIMARY KEY (`session_id`),
   KEY `last_activity_idx` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -519,15 +521,58 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('1e1da35784d699ed08a67158ba21b667','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368226,'a:3:{s:9:\"user_data\";s:0:\"\";s:6:\"e-mail\";s:6:\"daniel\";s:12:\"is_logged_in\";b:1;}');
-INSERT INTO `ci_sessions` VALUES ('24383cd628039c6b5c07839cfcda67d5','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407408473,'');
-INSERT INTO `ci_sessions` VALUES ('451794b52803c5edf48ac1a9d9462b4b','192.168.0.9','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407375456,'');
-INSERT INTO `ci_sessions` VALUES ('504ea4bcfc42719b5dc23ac2b587f48f','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407376261,'');
-INSERT INTO `ci_sessions` VALUES ('9e77891cea1271c3272b7bb7a97d18c6','192.168.0.9','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1407372038,'');
-INSERT INTO `ci_sessions` VALUES ('af2faf3e24b9637b6a3f9108394c60a6','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407364704,'');
-INSERT INTO `ci_sessions` VALUES ('f65e948550caef6bcddeafec1daaa105','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407368063,'a:2:{s:6:\"e-mail\";s:5:\"byron\";s:12:\"is_logged_in\";b:1;}');
-INSERT INTO `ci_sessions` VALUES ('f71b82e31712424c3175d1c47a8c6da2','::1','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.77.4 (KHTML, like Gecko) Version/7.0.5 Safari/537.77.4',1407364747,'');
+INSERT INTO `ci_sessions` VALUES ('547f251d357600f7628db50ca9152f4f','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1408245748,'a:2:{s:9:\"user_data\";s:0:\"\";s:17:\"flash:old:mensaje\";s:73:\"El código de activación que ha introducido es incorrecto o ha caducado.\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `intentos_login`
+--
+
+DROP TABLE IF EXISTS `intentos_login`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `intentos_login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(40) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `intentos_login`
+--
+
+LOCK TABLES `intentos_login` WRITE;
+/*!40000 ALTER TABLE `intentos_login` DISABLE KEYS */;
+/*!40000 ALTER TABLE `intentos_login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `rol_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rol_nombre` varchar(20) NOT NULL,
+  `usu_id` int(11) NOT NULL,
+  PRIMARY KEY (`rol_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'',1);
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -539,11 +584,22 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `usu_id` int(11) NOT NULL AUTO_INCREMENT,
-  `usu_email` varchar(30) NOT NULL,
-  `usu_clave` varchar(32) NOT NULL,
+  `usu_email` varchar(100) NOT NULL,
+  `usu_clave` varchar(255) NOT NULL,
+  `usu_activado` tinyint(1) NOT NULL DEFAULT '1',
+  `usu_bloqueado` tinyint(1) NOT NULL DEFAULT '0',
+  `usu_razon_bloqueo` varchar(255) DEFAULT NULL,
+  `usu_nueva_clave_key` varchar(50) DEFAULT NULL,
+  `usu_nueva_clave_peticion` datetime DEFAULT NULL,
+  `usu_nuevo_email` varchar(100) DEFAULT NULL,
+  `usu_nuevo_email_key` varchar(50) DEFAULT NULL,
+  `usu_ultima_ip` varchar(40) NOT NULL,
+  `usu_ultimo_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `usu_creado` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `usu_modificado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`usu_id`),
   UNIQUE KEY `usu_usuario` (`usu_email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -552,6 +608,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'byr_070@hotmail.com','$2a$08$7xr0ynNnM/Gw8CLIWbYlvuT4Qm7AKnZEzCTPEmkFcrO5SfJzpFYBC',1,0,NULL,'126b23e5bc22dbf6369115f7c4c3f600','2014-08-17 05:17:17',NULL,NULL,'127.0.0.1','0000-00-00 00:00:00','2014-08-17 05:17:07','2014-08-17 03:18:11');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -564,4 +621,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-07 16:41:28
+-- Dump completed on 2014-08-17  3:23:24
