@@ -521,7 +521,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('547f251d357600f7628db50ca9152f4f','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1408245748,'a:2:{s:9:\"user_data\";s:0:\"\";s:17:\"flash:old:mensaje\";s:73:\"El código de activación que ha introducido es incorrecto o ha caducado.\";}');
+INSERT INTO `ci_sessions` VALUES ('2a8667f435ef2d66d0b19e25ceda036c','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1408376389,'');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,7 +608,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'byr_070@hotmail.com','$2a$08$7xr0ynNnM/Gw8CLIWbYlvuT4Qm7AKnZEzCTPEmkFcrO5SfJzpFYBC',1,0,NULL,'126b23e5bc22dbf6369115f7c4c3f600','2014-08-17 05:17:17',NULL,NULL,'127.0.0.1','0000-00-00 00:00:00','2014-08-17 05:17:07','2014-08-17 03:18:11');
+INSERT INTO `usuarios` VALUES (1,'byron.144@gmail.com','$2a$08$/ebZjukS2y71qOZWxkspdOx8Q7P9dD4CfCDEehosgpIxhkt4.hwKy',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','2014-08-18 17:38:02','2014-08-18 17:34:54','2014-08-18 15:39:49');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -621,4 +621,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-17  3:23:24
+-- Dump completed on 2014-08-18 16:18:37
