@@ -521,6 +521,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
+INSERT INTO `ci_sessions` VALUES ('25bc010a953437ce2bbd059ff9ce3868','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1408465940,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:19:\"byr_070@hotmail.com\";s:10:\"usu_status\";s:1:\"1\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -537,7 +538,7 @@ CREATE TABLE `intentos_login` (
   `login` varchar(50) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -561,7 +562,7 @@ CREATE TABLE `roles` (
   `rol_nombre` varchar(20) NOT NULL,
   `usu_id` int(11) NOT NULL,
   PRIMARY KEY (`rol_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -570,6 +571,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'',1);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -597,7 +599,7 @@ CREATE TABLE `usuarios` (
   `usu_modificado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`usu_id`),
   UNIQUE KEY `usu_usuario` (`usu_email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,6 +608,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'byr_070@hotmail.com','$2a$08$eVXzluuYrIvVkKUObQR1C.8VXiKm/1L/FboCsnK.P9pJLPWSDEjiS',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','2014-08-19 17:10:32','2014-08-19 17:05:26','2014-08-19 15:10:32');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -618,4 +621,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-18 16:23:16
+-- Dump completed on 2014-08-19 16:33:49
