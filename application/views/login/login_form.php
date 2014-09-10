@@ -34,7 +34,7 @@ $captcha = array(
 	<tr>
 		<td><?php echo form_label('E-mail: ', $email['id']); ?></td>
 		<td><?php echo form_input($email); ?></td>
-		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$login['name']]:''; ?></td>
+		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 	</tr>
 	<tr>
 		<td><?php echo form_label('Clave: ', $clave['id']); ?></td>

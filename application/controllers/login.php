@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 	function entrar(){
 		
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('/welcome');		
+			redirect('/empleado/');		
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/login/enviar_de_nuevo/');
 		} else {

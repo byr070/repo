@@ -29,8 +29,7 @@ CREATE TABLE `Alimentacion` (
   `alHoraFin` time NOT NULL,
   `Organizacion_orgId` int(11) NOT NULL,
   PRIMARY KEY (`aliId`),
-  KEY `Alimentacion_Organizacion` (`Organizacion_orgId`),
-  CONSTRAINT `Alimentacion_Organizacion` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`)
+  KEY `Alimentacion_Organizacion` (`Organizacion_orgId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,96 +40,6 @@ CREATE TABLE `Alimentacion` (
 LOCK TABLES `Alimentacion` WRITE;
 /*!40000 ALTER TABLE `Alimentacion` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Alimentacion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Cargo`
---
-
-DROP TABLE IF EXISTS `Cargo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Cargo` (
-  `car_id` int(11) NOT NULL,
-  `car_nombre` varchar(30) NOT NULL,
-  `sal_id` int(11) NOT NULL,
-  PRIMARY KEY (`car_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Cargo`
---
-
-LOCK TABLES `Cargo` WRITE;
-/*!40000 ALTER TABLE `Cargo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Cargo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `EmpHor`
---
-
-DROP TABLE IF EXISTS `EmpHor`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `EmpHor` (
-  `Empleado_usuId` int(11) NOT NULL,
-  `Horario_horId` int(11) NOT NULL,
-  PRIMARY KEY (`Empleado_usuId`,`Horario_horId`),
-  KEY `EmpHor_Horario` (`Horario_horId`),
-  CONSTRAINT `EmpHor_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
-  CONSTRAINT `EmpHor_Horario` FOREIGN KEY (`Horario_horId`) REFERENCES `HorarioTrabajo` (`horId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `EmpHor`
---
-
-LOCK TABLES `EmpHor` WRITE;
-/*!40000 ALTER TABLE `EmpHor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `EmpHor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Empleado`
---
-
-DROP TABLE IF EXISTS `Empleado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Empleado` (
-  `empId` int(11) NOT NULL,
-  `Organizacion_orgId` int(11) NOT NULL,
-  `Tipo_idTipo` int(11) NOT NULL,
-  `Cargo_carId` int(11) NOT NULL,
-  `empPassword` varchar(20) NOT NULL,
-  `empEmail` varchar(30) NOT NULL,
-  `empGenero` char(1) NOT NULL,
-  `Jornada_jorId` int(11) NOT NULL,
-  `Tarjeta_id` int(11) NOT NULL,
-  PRIMARY KEY (`empId`),
-  KEY `Empleado_Cargo` (`Cargo_carId`),
-  KEY `Empleado_Jornada` (`Jornada_jorId`),
-  KEY `Empleado_Organización` (`Organizacion_orgId`),
-  KEY `Empleado_Tarjeta` (`Tarjeta_id`),
-  KEY `Empleado_Tipo` (`Tipo_idTipo`),
-  CONSTRAINT `Empleado_Cargo` FOREIGN KEY (`Cargo_carId`) REFERENCES `Cargo` (`car_id`),
-  CONSTRAINT `Empleado_Jornada` FOREIGN KEY (`Jornada_jorId`) REFERENCES `Jornada` (`jorId`),
-  CONSTRAINT `Empleado_Organización` FOREIGN KEY (`Organizacion_orgId`) REFERENCES `Organizacion` (`orgId`),
-  CONSTRAINT `Empleado_Tarjeta` FOREIGN KEY (`Tarjeta_id`) REFERENCES `Tarjeta` (`id`),
-  CONSTRAINT `Empleado_Tipo` FOREIGN KEY (`Tipo_idTipo`) REFERENCES `Tipo` (`idTipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Empleado`
---
-
-LOCK TABLES `Empleado` WRITE;
-/*!40000 ALTER TABLE `Empleado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -158,55 +67,6 @@ LOCK TABLES `Feriado` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `HorarioTrabajo`
---
-
-DROP TABLE IF EXISTS `HorarioTrabajo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `HorarioTrabajo` (
-  `horId` int(11) NOT NULL,
-  `horaInicioTrabajo` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `horaFinTrabajo` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`horId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `HorarioTrabajo`
---
-
-LOCK TABLES `HorarioTrabajo` WRITE;
-/*!40000 ALTER TABLE `HorarioTrabajo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `HorarioTrabajo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Jornada`
---
-
-DROP TABLE IF EXISTS `Jornada`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Jornada` (
-  `jorId` int(11) NOT NULL,
-  `diasTrabajo` int(11) NOT NULL,
-  `diasDescanso` int(11) NOT NULL,
-  PRIMARY KEY (`jorId`),
-  UNIQUE KEY `Jornada_ak_1` (`diasTrabajo`,`diasDescanso`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Jornada`
---
-
-LOCK TABLES `Jornada` WRITE;
-/*!40000 ALTER TABLE `Jornada` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Jornada` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Objetos`
 --
 
@@ -227,55 +87,6 @@ CREATE TABLE `Objetos` (
 LOCK TABLES `Objetos` WRITE;
 /*!40000 ALTER TABLE `Objetos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Objetos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Organizacion`
---
-
-DROP TABLE IF EXISTS `Organizacion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Organizacion` (
-  `orgId` int(11) NOT NULL,
-  `orgNombre` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`orgId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Organizacion`
---
-
-LOCK TABLES `Organizacion` WRITE;
-/*!40000 ALTER TABLE `Organizacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Organizacion` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `PeriodoSalida`
---
-
-DROP TABLE IF EXISTS `PeriodoSalida`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PeriodoSalida` (
-  `Empleado_usuId` int(11) NOT NULL,
-  `TipoSalida_tipId` int(11) NOT NULL,
-  PRIMARY KEY (`Empleado_usuId`,`TipoSalida_tipId`),
-  KEY `SalidaTomada_TipoSalida` (`TipoSalida_tipId`),
-  CONSTRAINT `SalidaTomada_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
-  CONSTRAINT `SalidaTomada_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `PeriodoSalida`
---
-
-LOCK TABLES `PeriodoSalida` WRITE;
-/*!40000 ALTER TABLE `PeriodoSalida` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PeriodoSalida` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -300,175 +111,6 @@ CREATE TABLE `Permisos` (
 LOCK TABLES `Permisos` WRITE;
 /*!40000 ALTER TABLE `Permisos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Permisos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ProEmp`
---
-
-DROP TABLE IF EXISTS `ProEmp`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ProEmp` (
-  `Proyecto_proId` int(11) NOT NULL,
-  `Empleado_usuId` int(11) NOT NULL,
-  PRIMARY KEY (`Proyecto_proId`,`Empleado_usuId`),
-  KEY `ProEmp_Empleado` (`Empleado_usuId`),
-  CONSTRAINT `ProEmp_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
-  CONSTRAINT `ProEmp_Proyecto` FOREIGN KEY (`Proyecto_proId`) REFERENCES `Proyecto` (`proId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ProEmp`
---
-
-LOCK TABLES `ProEmp` WRITE;
-/*!40000 ALTER TABLE `ProEmp` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ProEmp` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Proyecto`
---
-
-DROP TABLE IF EXISTS `Proyecto`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Proyecto` (
-  `proId` int(11) NOT NULL,
-  PRIMARY KEY (`proId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Proyecto`
---
-
-LOCK TABLES `Proyecto` WRITE;
-/*!40000 ALTER TABLE `Proyecto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Proyecto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Salario`
---
-
-DROP TABLE IF EXISTS `Salario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Salario` (
-  `sal_id` int(11) NOT NULL,
-  `sal_valor` int(11) NOT NULL,
-  PRIMARY KEY (`sal_id`),
-  KEY `Salario_Empleado` (`sal_valor`),
-  CONSTRAINT `Salario_Empleado` FOREIGN KEY (`sal_valor`) REFERENCES `Empleado` (`empId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Salario`
---
-
-LOCK TABLES `Salario` WRITE;
-/*!40000 ALTER TABLE `Salario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Salario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `SalidaAnual`
---
-
-DROP TABLE IF EXISTS `SalidaAnual`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `SalidaAnual` (
-  `Empleado_usuId` int(11) NOT NULL,
-  `TipoSalida_tipId` int(11) NOT NULL,
-  `anio` int(11) NOT NULL,
-  PRIMARY KEY (`Empleado_usuId`,`TipoSalida_tipId`,`anio`),
-  KEY `Salida_TipoSalida` (`TipoSalida_tipId`),
-  CONSTRAINT `Salida_Empleado` FOREIGN KEY (`Empleado_usuId`) REFERENCES `Empleado` (`empId`),
-  CONSTRAINT `Salida_TipoSalida` FOREIGN KEY (`TipoSalida_tipId`) REFERENCES `TipoSalida` (`tipId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `SalidaAnual`
---
-
-LOCK TABLES `SalidaAnual` WRITE;
-/*!40000 ALTER TABLE `SalidaAnual` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SalidaAnual` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Tarjeta`
---
-
-DROP TABLE IF EXISTS `Tarjeta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Tarjeta` (
-  `id` int(11) NOT NULL,
-  `valor` char(32) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `Tarjeta_ak_1` (`valor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Tarjeta`
---
-
-LOCK TABLES `Tarjeta` WRITE;
-/*!40000 ALTER TABLE `Tarjeta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Tarjeta` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Tipo`
---
-
-DROP TABLE IF EXISTS `Tipo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Tipo` (
-  `idTipo` int(11) NOT NULL,
-  `tipo` varchar(10) NOT NULL,
-  PRIMARY KEY (`idTipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Tipo`
---
-
-LOCK TABLES `Tipo` WRITE;
-/*!40000 ALTER TABLE `Tipo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Tipo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `TipoSalida`
---
-
-DROP TABLE IF EXISTS `TipoSalida`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `TipoSalida` (
-  `tipId` int(11) NOT NULL,
-  PRIMARY KEY (`tipId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TipoSalida`
---
-
-LOCK TABLES `TipoSalida` WRITE;
-/*!40000 ALTER TABLE `TipoSalida` DISABLE KEYS */;
-/*!40000 ALTER TABLE `TipoSalida` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -498,6 +140,58 @@ LOCK TABLES `autologin_usuario` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `canton`
+--
+
+DROP TABLE IF EXISTS `canton`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `canton` (
+  `cnt_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cnt_nombre` varchar(60) NOT NULL,
+  `prv_id` int(11) NOT NULL,
+  PRIMARY KEY (`cnt_id`),
+  UNIQUE KEY `fk_canton_provincia` (`prv_id`),
+  CONSTRAINT `fk_canton_provincia` FOREIGN KEY (`prv_id`) REFERENCES `provincia` (`prv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `canton`
+--
+
+LOCK TABLES `canton` WRITE;
+/*!40000 ALTER TABLE `canton` DISABLE KEYS */;
+/*!40000 ALTER TABLE `canton` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cargo`
+--
+
+DROP TABLE IF EXISTS `cargo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cargo` (
+  `crg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `crg_nombre` varchar(30) NOT NULL,
+  `sal_id` int(11) NOT NULL,
+  PRIMARY KEY (`crg_id`),
+  KEY `fk_cargo_salario` (`sal_id`),
+  CONSTRAINT `fk_cargo_salario` FOREIGN KEY (`sal_id`) REFERENCES `salario` (`sal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cargo`
+--
+
+LOCK TABLES `cargo` WRITE;
+/*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ci_sessions`
 --
 
@@ -521,8 +215,108 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('25bc010a953437ce2bbd059ff9ce3868','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1408465940,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:19:\"byr_070@hotmail.com\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('0eec0ae0d095e376755d6b30180fe453','93.115.89.126','Mozilla/5.0 (Windows; U; Windows NT 6.1; de-DE) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1',1410371374,'');
+INSERT INTO `ci_sessions` VALUES ('34fdea2a517b74d3f17771f1c762ec71','173.252.120.119','facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',1410370583,'');
+INSERT INTO `ci_sessions` VALUES ('9f4affa3f433111ae289ade9dfb32e4b','201.183.168.244','Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; GT-S5830i Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/',1410371704,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('a6d8f69c760937ac0520e598ce03922d','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1410373481,'a:3:{s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('da5b2b26ae8d86e155d37ad500c440c9','69.171.248.7','facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',1410370586,'');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `emp_hor`
+--
+
+DROP TABLE IF EXISTS `emp_hor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `emp_hor` (
+  `Empleado_emp_id` int(11) NOT NULL,
+  `Horario_hor_id` int(11) NOT NULL,
+  PRIMARY KEY (`Empleado_emp_id`,`Horario_hor_id`),
+  KEY `EmpHor_Horario` (`Horario_hor_id`),
+  CONSTRAINT `fk_emp_hor_empleado` FOREIGN KEY (`Empleado_emp_id`) REFERENCES `empleado` (`emp_id`),
+  CONSTRAINT `fk_emp_hor_horario` FOREIGN KEY (`Horario_hor_id`) REFERENCES `horario_trabajo` (`hor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emp_hor`
+--
+
+LOCK TABLES `emp_hor` WRITE;
+/*!40000 ALTER TABLE `emp_hor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emp_hor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado`
+--
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  `emp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `emp_nombre_completo` varchar(20) NOT NULL,
+  `emp_numero_cedula` varchar(30) NOT NULL,
+  `emp_fecha_nacimiento` date DEFAULT '0000-00-00',
+  `emp_lugar_nacimiento` int(11) NOT NULL,
+  `emp_provincia_residencia` int(11) NOT NULL,
+  `Organizacion_org_id` int(11) NOT NULL DEFAULT '1',
+  `Cargo_crg_id` int(11) DEFAULT NULL,
+  `Jornada_jor_id` int(11) DEFAULT NULL,
+  `Tipo_tip_id` int(11) DEFAULT NULL,
+  `Tarjeta_tar_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`emp_id`),
+  KEY `Empleado_Cargo` (`Cargo_crg_id`),
+  KEY `Empleado_Jornada` (`Jornada_jor_id`),
+  KEY `Empleado_Organización` (`Organizacion_org_id`),
+  KEY `Empleado_Tarjeta` (`Tarjeta_tar_id`),
+  KEY `Empleado_Tipo` (`Tipo_tip_id`),
+  KEY `fk_empleado_parroquia` (`emp_lugar_nacimiento`),
+  KEY `fk_empleado_provincia` (`emp_provincia_residencia`),
+  CONSTRAINT `fk_empleado_cargo` FOREIGN KEY (`Cargo_crg_id`) REFERENCES `cargo` (`crg_id`),
+  CONSTRAINT `fk_empleado_jornada` FOREIGN KEY (`Jornada_jor_id`) REFERENCES `jornada` (`jor_id`),
+  CONSTRAINT `fk_empleado_organizacion` FOREIGN KEY (`Organizacion_org_id`) REFERENCES `organizacion` (`org_id`),
+  CONSTRAINT `fk_empleado_tarjeta` FOREIGN KEY (`Tarjeta_tar_id`) REFERENCES `tarjeta` (`tar_id`),
+  CONSTRAINT `fk_empleado_tipo` FOREIGN KEY (`Tipo_tip_id`) REFERENCES `tipo` (`tip_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,'xx yy','1','0000-00-00',0,0,1,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `horario_trabajo`
+--
+
+DROP TABLE IF EXISTS `horario_trabajo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `horario_trabajo` (
+  `hor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hor_hora_inicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `hor_hora_fin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`hor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `horario_trabajo`
+--
+
+LOCK TABLES `horario_trabajo` WRITE;
+/*!40000 ALTER TABLE `horario_trabajo` DISABLE KEYS */;
+INSERT INTO `horario_trabajo` VALUES (1,'2014-09-09 07:00:00','2014-09-09 17:00:00');
+/*!40000 ALTER TABLE `horario_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -538,7 +332,7 @@ CREATE TABLE `intentos_login` (
   `login` varchar(50) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,6 +342,184 @@ CREATE TABLE `intentos_login` (
 LOCK TABLES `intentos_login` WRITE;
 /*!40000 ALTER TABLE `intentos_login` DISABLE KEYS */;
 /*!40000 ALTER TABLE `intentos_login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jornada`
+--
+
+DROP TABLE IF EXISTS `jornada`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jornada` (
+  `jor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `jor_dias_trabajo` int(11) NOT NULL,
+  `jor_dias_descanso` int(11) NOT NULL,
+  PRIMARY KEY (`jor_id`),
+  UNIQUE KEY `Jornada_ak_1` (`jor_dias_trabajo`,`jor_dias_descanso`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jornada`
+--
+
+LOCK TABLES `jornada` WRITE;
+/*!40000 ALTER TABLE `jornada` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jornada` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organizacion`
+--
+
+DROP TABLE IF EXISTS `organizacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organizacion` (
+  `org_id` int(11) NOT NULL AUTO_INCREMENT,
+  `org_nombre` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`org_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organizacion`
+--
+
+LOCK TABLES `organizacion` WRITE;
+/*!40000 ALTER TABLE `organizacion` DISABLE KEYS */;
+INSERT INTO `organizacion` VALUES (1,'XYZ');
+/*!40000 ALTER TABLE `organizacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `parroquia`
+--
+
+DROP TABLE IF EXISTS `parroquia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parroquia` (
+  `parr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `parr_nombre` varchar(60) NOT NULL,
+  `cnt_id` int(11) NOT NULL,
+  PRIMARY KEY (`parr_id`),
+  UNIQUE KEY `fk_parroquia_canton` (`cnt_id`),
+  CONSTRAINT `fk_parroquia_canton` FOREIGN KEY (`cnt_id`) REFERENCES `canton` (`cnt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parroquia`
+--
+
+LOCK TABLES `parroquia` WRITE;
+/*!40000 ALTER TABLE `parroquia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `parroquia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `periodo_salida`
+--
+
+DROP TABLE IF EXISTS `periodo_salida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `periodo_salida` (
+  `sld_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sld_inicio` datetime NOT NULL,
+  `sld_fin` datetime NOT NULL,
+  `sld_estado` varchar(20) NOT NULL,
+  `Empleado_emp_id` int(11) DEFAULT NULL,
+  `Tipo_salida_tip_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`sld_id`),
+  UNIQUE KEY `fk_salida_tipo` (`Tipo_salida_tip_id`),
+  KEY `fk_salida_empleado` (`Empleado_emp_id`),
+  CONSTRAINT `fk_periodo_salida_tipo` FOREIGN KEY (`Tipo_salida_tip_id`) REFERENCES `tipo_salida` (`tip_id`),
+  CONSTRAINT `fk_periodo_salida_empleado` FOREIGN KEY (`Empleado_emp_id`) REFERENCES `empleado` (`emp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `periodo_salida`
+--
+
+LOCK TABLES `periodo_salida` WRITE;
+/*!40000 ALTER TABLE `periodo_salida` DISABLE KEYS */;
+INSERT INTO `periodo_salida` VALUES (1,'2014-09-11 07:00:00','2014-09-11 11:00:00','',1,NULL);
+/*!40000 ALTER TABLE `periodo_salida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pro_emp`
+--
+
+DROP TABLE IF EXISTS `pro_emp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pro_emp` (
+  `Proyecto_pro_id` int(11) NOT NULL,
+  `Empleado_emp_id` int(11) NOT NULL,
+  PRIMARY KEY (`Proyecto_pro_id`,`Empleado_emp_id`),
+  KEY `ProEmp_Empleado` (`Empleado_emp_id`),
+  CONSTRAINT `fk_pro_emp_empleado` FOREIGN KEY (`Empleado_emp_id`) REFERENCES `empleado` (`emp_id`),
+  CONSTRAINT `fk_pro_emp_proyecto` FOREIGN KEY (`Proyecto_pro_id`) REFERENCES `proyecto` (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pro_emp`
+--
+
+LOCK TABLES `pro_emp` WRITE;
+/*!40000 ALTER TABLE `pro_emp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pro_emp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `provincia`
+--
+
+DROP TABLE IF EXISTS `provincia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `provincia` (
+  `prv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prv_nombre` varchar(60) NOT NULL,
+  PRIMARY KEY (`prv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `provincia`
+--
+
+LOCK TABLES `provincia` WRITE;
+/*!40000 ALTER TABLE `provincia` DISABLE KEYS */;
+/*!40000 ALTER TABLE `provincia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proyecto`
+--
+
+DROP TABLE IF EXISTS `proyecto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proyecto` (
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proyecto`
+--
+
+LOCK TABLES `proyecto` WRITE;
+/*!40000 ALTER TABLE `proyecto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `proyecto` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -573,6 +545,152 @@ LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` VALUES (1,'',1);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `salario`
+--
+
+DROP TABLE IF EXISTS `salario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `salario` (
+  `sal_id` int(11) NOT NULL,
+  `sal_valor` int(11) NOT NULL,
+  PRIMARY KEY (`sal_id`),
+  KEY `Salario_Empleado` (`sal_valor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salario`
+--
+
+LOCK TABLES `salario` WRITE;
+/*!40000 ALTER TABLE `salario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `salida_anual`
+--
+
+DROP TABLE IF EXISTS `salida_anual`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `salida_anual` (
+  `Empleado_emp_id` int(11) NOT NULL,
+  `Tipo_salida_tip_id` int(11) NOT NULL,
+  `anio` int(11) NOT NULL,
+  PRIMARY KEY (`Empleado_emp_id`,`Tipo_salida_tip_id`,`anio`),
+  KEY `Salida_TipoSalida` (`Tipo_salida_tip_id`),
+  CONSTRAINT `fk_salida_empleado` FOREIGN KEY (`Empleado_emp_id`) REFERENCES `empleado` (`emp_id`),
+  CONSTRAINT `fk_salida_tipo` FOREIGN KEY (`Tipo_salida_tip_id`) REFERENCES `tipo_salida` (`tip_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salida_anual`
+--
+
+LOCK TABLES `salida_anual` WRITE;
+/*!40000 ALTER TABLE `salida_anual` DISABLE KEYS */;
+/*!40000 ALTER TABLE `salida_anual` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tarjeta`
+--
+
+DROP TABLE IF EXISTS `tarjeta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tarjeta` (
+  `tar_id` int(11) NOT NULL,
+  `tar_valor` char(32) NOT NULL,
+  PRIMARY KEY (`tar_id`),
+  UNIQUE KEY `Tarjeta_ak_1` (`tar_valor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tarjeta`
+--
+
+LOCK TABLES `tarjeta` WRITE;
+/*!40000 ALTER TABLE `tarjeta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tarjeta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `telefono`
+--
+
+DROP TABLE IF EXISTS `telefono`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `telefono` (
+  `tlf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tlf_numero` varchar(11) NOT NULL,
+  `emp_id` int(11) NOT NULL,
+  PRIMARY KEY (`tlf_id`),
+  KEY `fk_telefono_empleado` (`emp_id`),
+  CONSTRAINT `fk_telefono_empleado` FOREIGN KEY (`emp_id`) REFERENCES `empleado` (`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `telefono`
+--
+
+LOCK TABLES `telefono` WRITE;
+/*!40000 ALTER TABLE `telefono` DISABLE KEYS */;
+/*!40000 ALTER TABLE `telefono` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo`
+--
+
+DROP TABLE IF EXISTS `tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipo` (
+  `tip_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tip_nombre` varchar(10) NOT NULL,
+  PRIMARY KEY (`tip_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo`
+--
+
+LOCK TABLES `tipo` WRITE;
+/*!40000 ALTER TABLE `tipo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_salida`
+--
+
+DROP TABLE IF EXISTS `tipo_salida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipo_salida` (
+  `tip_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`tip_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_salida`
+--
+
+LOCK TABLES `tipo_salida` WRITE;
+/*!40000 ALTER TABLE `tipo_salida` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_salida` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -608,7 +726,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'byr_070@hotmail.com','$2a$08$eVXzluuYrIvVkKUObQR1C.8VXiKm/1L/FboCsnK.P9pJLPWSDEjiS',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','2014-08-19 17:10:32','2014-08-19 17:05:26','2014-08-19 15:10:32');
+INSERT INTO `usuarios` VALUES (1,'admin','$2a$08$eVXzluuYrIvVkKUObQR1C.8VXiKm/1L/FboCsnK.P9pJLPWSDEjiS',1,0,NULL,NULL,NULL,NULL,NULL,'201.183.168.244','2014-09-10 19:55:27','2014-08-19 17:05:26','2014-09-10 17:55:27');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -621,4 +739,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-19 16:33:58
+-- Dump completed on 2014-09-10 18:31:52
