@@ -55,4 +55,24 @@ class Empleado_model extends CI_Model
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
+
+	function crear_empleado($data='')
+	{
+		$data['emp_creado'] = date('Y-m-d H:i:s');
+
+		if ($this->db->insert($this->table_name_empleado, $data)) {
+			$emp_id = $this->db->insert_id();
+			//if ($activated)	$this->crear_perfil($emp_id);
+			return array('emp_id' => $emp_id);
+		}
+		return NULL;
+	}
+	
+	public function get_id_por_nombre($emp_nombre_completo = '') {
+		$this->db->select('emp_id');
+		$this->db->where('emp_nombre_completo',$emp_nombre_completo);
+		$query = $this->db->get($this->table_name_empleado);
+		if ($query->num_rows() == 1) return $query->row();
+		return NULL;
+	}
 }

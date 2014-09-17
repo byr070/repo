@@ -348,6 +348,32 @@ class Usuarios extends CI_Model
 		$this->db->where('usu_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+
+	/**
+	 * Activate user if activation key is valid.
+	 * Can be called for not activated users only.
+	 *
+	 * @param	int
+	 * @param	string
+	 * @param	bool
+	 * @return	bool
+	 */
+	function actualizar_empleado($usu_id, $emp_id)
+	{
+		$this->db->select('1', FALSE);
+		$this->db->where('usu_id', $usu_id);
+		// $this->db->where('emp_id', 0);
+		$query = $this->db->get($this->table_name);
+
+		if ($query->num_rows() == 1) {
+
+			$this->db->set('emp_id', $emp_id);
+			$this->db->where('usu_id', $usu_id);
+			$this->db->update($this->table_name);
+			return TRUE;
+		}
+		return FALSE;
+	}
 }
 
 /* End of file usuarios.php */

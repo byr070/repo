@@ -618,6 +618,26 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+
+	/**
+	 * Activate user using given key
+	 *
+	 * @param	string
+	 * @param	string
+	 * @param	bool
+	 * @return	bool
+	 */
+	function actualizar_empleado($usu_id, $emp_id)
+	{
+		
+		if ((strlen($usu_id) > 0) AND (strlen($emp_id) > 0)) {
+			return $this->ci->usuarios->actualizar_empleado($usu_id, $emp_id);
+		}
+		return FALSE;
+	}
+
+
+
 }
 
 /* End of file Tank_auth.php */

@@ -51,4 +51,32 @@ class Salida_model extends CI_Model
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
+	function crear_salida($data)
+	{
+		//$emp_id=$data['emp_id'];
+		//unset($data['emp_id']);
+		$data['sld_creado'] = date('Y-m-d H:i:s');
+		//$this->db->where('Empleado_emp_id', $data['emp_id']);
+
+		if ($res = $this->existe_salida($data)){
+			$sld_id = $res['0']->sld_id;
+		} else {
+			if ($this->db->insert($this->table_name_salida, $data)) {
+				$sld_id = $this->db->insert_id();
+			}
+		}
+		return array('sld_id' => $sld_id);
+	}
+
+	function existe_salida($data)
+	{
+		//$this->db->select('hor_hora_inicio');
+		$this->db->select('sld_id', FALSE);
+		$this->db->where('sld_inicio', $data['sld_inicio']);
+		$this->db->where('sld_fin', $data['sld_fin']);
+		$this->db->where('Empleado_emp_id', $data['Empleado_emp_id']);
+		$query = $this->db->get($this->table_name_salida);
+		if ($query->num_rows() > 0) return $query->result();
+		return NULL;
+	}
 }

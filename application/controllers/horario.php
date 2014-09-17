@@ -7,10 +7,14 @@ class Horario extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('url');
+		$this->load->library('form_validation');
+		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->load->library('table');
+		$this->lang->load('form_validation','spanish');
 		$this->load->model('horario/horario_model');
 		$this->load->model('horario/salida_model');
+		$this->load->model('empleado/empleado_model');
 	}
 
 	function index()
@@ -46,14 +50,12 @@ class Horario extends CI_Controller
 						anchor('/horario/verDetalle/'.$hor->hor_id, $hor->hor_hora_fin))
 					);
 				}
-				$this->load->view('/horario/listar_horario_view');
-			} else {
-				redirect('/horario/');
 			}
+			$this->load->view('/horario/listar_horario_view'); 
 		}
 	}
 
-	function asignar_horario($value='')
+	function asignar_horario()
 	{
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('');
@@ -62,6 +64,29 @@ class Horario extends CI_Controller
 			$data['email']	= $this->tank_auth->get_email();
 			$this->load->view('welcome', $data);
 			$this->load->view('menu');
+
+			$this->form_validation->set_rules('nombre_completo', 'nombre completo', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('hora_inicio', 'hora inicio', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('hora_fin', 'hora fin', 'trim|required|xss_clean');
+			
+			if ($this->form_validation->run()) {
+				if (strlen($this->form_validation->set_value('nombre_completo')) > 0) {
+					$data = array(
+						'hor_hora_inicio' => $this->form_validation->set_value('hora_inicio'),
+						'hor_hora_fin' => $this->form_validation->set_value('hora_fin'),
+						'nombre_completo' => $this->form_validation->set_value('nombre_completo')
+						);
+					if (!is_null($res = $this->empleado_model->get_id_por_nombre($data['nombre_completo']))) {
+						unset($data['nombre_completo']);
+						$data['emp_id'] = $res->emp_id;
+						if (!is_null($res = $this->horario_model->crear_horario($data))) {
+							$data['hor_id']=$res['hor_id'];
+							//print_r($res);
+							//redirect('/horario/'); si ni hay registro redirige al controlador empleado
+						}
+					}
+				}
+			} 
 			$this->load->view('/horario/asignar_horario_form');
 		}
 	}
@@ -95,10 +120,11 @@ class Horario extends CI_Controller
 			} else {
 				redirect('/horario/');
 			}
+
+
 		}
 	}
-	public function asignar_salida($value='')
-	{
+	public function asignar_salida($value='') {
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('');
 		} else {
@@ -106,6 +132,28 @@ class Horario extends CI_Controller
 			$data['email']	= $this->tank_auth->get_email();
 			$this->load->view('welcome', $data);
 			$this->load->view('menu');
+			$this->form_validation->set_rules('nombre_completo', 'nombre completo', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('sld_inicio', 'hora inicio', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('sld_fin', 'hora fin', 'trim|required|xss_clean');
+			
+			if ($this->form_validation->run()) {
+				if (strlen($this->form_validation->set_value('nombre_completo')) > 0) {
+					$data = array(
+						'sld_inicio' => $this->form_validation->set_value('sld_inicio'),
+						'sld_fin' => $this->form_validation->set_value('sld_fin'),
+						'nombre_completo' => $this->form_validation->set_value('nombre_completo')
+						);
+					if (!is_null($res = $this->empleado_model->get_id_por_nombre($data['nombre_completo']))) {
+						unset($data['nombre_completo']);
+						$data['Empleado_emp_id'] = $res->emp_id;
+						if (!is_null($res = $this->salida_model->crear_salida($data))) {
+							$data['sld_id']=$res['sld_id'];
+							print_r($data);
+							//redirect('/horario/'); si ni hay registro redirige al controlador empleado
+						}
+					}
+				}
+			} 
 			$this->load->view('/horario/asignar_salida_form');
 		}
 	}

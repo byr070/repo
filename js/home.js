@@ -20,6 +20,6 @@ $(document).ready(function() {
 	});
 	
 	$(':password.password_confirm').focusout(function() {
-		$(this).atrr('placeholder', 'Confirm password');
+		$(this).atrr('placeholder', 'Confirmar clave');
 	});
 });
