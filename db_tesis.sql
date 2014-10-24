@@ -179,7 +179,7 @@ CREATE TABLE `cargo` (
   PRIMARY KEY (`crg_id`),
   KEY `fk_cargo_salario` (`sal_id`),
   CONSTRAINT `fk_cargo_salario` FOREIGN KEY (`sal_id`) REFERENCES `salario` (`sal_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,6 +188,7 @@ CREATE TABLE `cargo` (
 
 LOCK TABLES `cargo` WRITE;
 /*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` VALUES (1,'Administrador',1);
 /*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,20 +216,12 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('03570796af8db440d10bb9bf94f0c4da','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('0957824212e6166d66325c1886e1cec1','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000285,'');
-INSERT INTO `ci_sessions` VALUES ('382db7995a5de4ffcae4ecca0a8fd735','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411007098,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
-INSERT INTO `ci_sessions` VALUES ('405bc38a5548dd2895dc0ce48d7be837','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('47b9c3e750c6d868b3917feafc9aa2ba','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000286,'');
-INSERT INTO `ci_sessions` VALUES ('54ab7a9474a5bde6bbb8d7435164c7a4','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('605ebad5c283efac97a51a05379b07ca','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000286,'');
-INSERT INTO `ci_sessions` VALUES ('6aa83e56fe9f79789a642cddb17f88fc','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('94fcaf8520abe0f39065d359af74c8be','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('b0bff25259c05aacea6b39abadf97a97','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
-INSERT INTO `ci_sessions` VALUES ('db1e7d8c6af3a9f66e70c412dba3d9da','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000285,'');
-INSERT INTO `ci_sessions` VALUES ('f4d275685c86da493f00afe2a8ad43a1','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000286,'');
-INSERT INTO `ci_sessions` VALUES ('fafab3b8717705ca634b21f0f08fa5cf','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000285,'');
-INSERT INTO `ci_sessions` VALUES ('fc805730e597e40811738e017adbab33','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1411000291,'');
+INSERT INTO `ci_sessions` VALUES ('0faf6c6f6bf0dcf88e851d337cf14c31','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1414019574,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('5575534c5caecccf7c82b8efd47a8f5e','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1413883605,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('5a70bf9a2f961c28c63cd38a1305c207','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1413969746,'');
+INSERT INTO `ci_sessions` VALUES ('df29446246630e227854a298c1b381b1','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1413935282,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
+INSERT INTO `ci_sessions` VALUES ('e565a0f99a805e321d992f315a3724e6','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1414009689,'');
+INSERT INTO `ci_sessions` VALUES ('f6b83c0ef6a31d6af7610851d40e4f37','127.0.0.1','Mozilla/5.0 (X11; Linux i686; rv:27.0) Gecko/20100101 Firefox/27.0',1414164471,'a:4:{s:9:\"user_data\";s:0:\"\";s:6:\"usu_id\";s:1:\"1\";s:9:\"usu_email\";s:5:\"admin\";s:10:\"usu_status\";s:1:\"1\";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,7 +295,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'xx yy','1','0000-00-00',0,0,'0000-00-00 00:00:00',1,NULL,NULL,NULL,NULL);
+INSERT INTO `empleado` VALUES (1,'xx yy','1','0000-00-00',0,0,'0000-00-00 00:00:00',1,1,NULL,NULL,NULL);
 INSERT INTO `empleado` VALUES (2,'a','1','0000-00-00',0,0,'2014-09-12 16:55:29',1,NULL,NULL,NULL,NULL);
 INSERT INTO `empleado` VALUES (3,'a','1','0000-00-00',0,0,'2014-09-12 16:56:04',1,NULL,NULL,NULL,NULL);
 INSERT INTO `empleado` VALUES (4,'a','1','0000-00-00',0,0,'2014-09-12 16:59:10',1,NULL,NULL,NULL,NULL);
@@ -333,6 +326,8 @@ CREATE TABLE `horario_trabajo` (
   `hor_id` int(11) NOT NULL AUTO_INCREMENT,
   `hor_hora_inicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `hor_hora_fin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `hor_dia_inicio` date NOT NULL,
+  `hor_dia_fin` date NOT NULL,
   `hor_creado` datetime NOT NULL,
   PRIMARY KEY (`hor_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -344,7 +339,7 @@ CREATE TABLE `horario_trabajo` (
 
 LOCK TABLES `horario_trabajo` WRITE;
 /*!40000 ALTER TABLE `horario_trabajo` DISABLE KEYS */;
-INSERT INTO `horario_trabajo` VALUES (1,'2014-09-09 07:00:00','2014-09-09 17:00:00','2014-09-17 14:26:31');
+INSERT INTO `horario_trabajo` VALUES (1,'2014-09-09 07:00:00','2014-09-09 17:00:00','0000-00-00','0000-00-00','2014-09-17 14:26:31');
 /*!40000 ALTER TABLE `horario_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,11 +588,11 @@ DROP TABLE IF EXISTS `salario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `salario` (
-  `sal_id` int(11) NOT NULL,
+  `sal_id` int(11) NOT NULL AUTO_INCREMENT,
   `sal_valor` int(11) NOT NULL,
   PRIMARY KEY (`sal_id`),
   KEY `Salario_Empleado` (`sal_valor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,6 +601,7 @@ CREATE TABLE `salario` (
 
 LOCK TABLES `salario` WRITE;
 /*!40000 ALTER TABLE `salario` DISABLE KEYS */;
+INSERT INTO `salario` VALUES (1,320);
 /*!40000 ALTER TABLE `salario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,7 +763,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin','$2a$08$eVXzluuYrIvVkKUObQR1C.8VXiKm/1L/FboCsnK.P9pJLPWSDEjiS',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','2014-09-18 04:24:58','2014-08-19 17:05:26','2014-09-18 02:24:58',NULL);
+INSERT INTO `usuarios` VALUES (1,'admin','$2a$08$eVXzluuYrIvVkKUObQR1C.8VXiKm/1L/FboCsnK.P9pJLPWSDEjiS',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','2014-10-24 17:27:55','2014-08-19 17:05:26','2014-10-24 15:27:55',NULL);
 INSERT INTO `usuarios` VALUES (4,'a2986338@trbvm.com','$2a$08$bdJ355lWBqiRndLVf9Hvk.8DZ1c11o0FqrqGYwTGs9xN2zy25aiA2',0,0,NULL,NULL,NULL,NULL,'281fd10e25a8d14d234055be01841701','127.0.0.1','0000-00-00 00:00:00','2014-09-14 13:25:15','2014-09-14 11:25:15',NULL);
 INSERT INTO `usuarios` VALUES (5,'byr_070@hotmail.com','$2a$08$uqc5Bwj1GtM3J7ZwR6edLezUYQmU9DBCOGxkrQJbxnBYAwa9utbm.',1,0,NULL,NULL,NULL,NULL,NULL,'127.0.0.1','0000-00-00 00:00:00','2014-09-14 15:32:36','2014-09-14 13:32:52',NULL);
 INSERT INTO `usuarios` VALUES (6,'a3085778@trbvm.com','$2a$08$eyjHl4rVXp9pGahwEb17buZbLNdZDfi0Ju4FA0PlibF/yP78.nL/m',0,0,NULL,NULL,NULL,NULL,'7e310f7909743207291689a850d0d346','127.0.0.1','0000-00-00 00:00:00','2014-09-15 19:05:39','2014-09-15 17:05:39',13);
@@ -787,4 +783,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-18  2:31:27
+-- Dump completed on 2014-10-24 15:33:28
